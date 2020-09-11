@@ -16,6 +16,10 @@ fun Application.module(testing: Boolean = false) {
         get("/greeting") {
             call.respondText("Hello my friend!", contentType = ContentType.Text.Plain)
         }
+        get("/greeting/{user}") {
+            val user = call.parameters["user"] ?: "my friend"
+            call.respondText("Hello ${user.capitalize()}!", contentType = ContentType.Text.Plain)
+        }
 
         install(StatusPages) {
             exception<AuthenticationException> { cause ->
