@@ -14,7 +14,7 @@ class ApplicationTest {
         withTestApplication({ module(testing = true) }) {
             handleRequest(HttpMethod.Get, "/greeting").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("Hello my friend!", response.content)
+                assertTrue(predefinedMessagesFor("my friend").contains(response.content))
             }
         }
     }
@@ -28,12 +28,12 @@ class ApplicationTest {
             }
         }
     }
+}
 
-    private fun predefinedMessagesFor(user: String): List<String> {
-        val hello = "Hello $user!"
-        val hey = "Hey $user, nice to see you here!"
-        val welcome = "$user welcome back!"
-        val splendid = "Have a splendid day $user."
-        return listOf(hello, hey, welcome, splendid)
-    }
+fun predefinedMessagesFor(user: String): List<String> {
+    val hello = "Hello $user!"
+    val hey = "Hey $user, nice to see you here!"
+    val welcome = "$user welcome back!"
+    val splendid = "Have a splendid day $user."
+    return listOf(hello, hey, welcome, splendid)
 }

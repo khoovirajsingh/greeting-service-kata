@@ -1,8 +1,9 @@
 package com.katas.com.katas
 
-class GreetingService {
+class GreetingService(private val customMessageGenerator: CustomMessageGenerator) {
     fun greet(user: String? = ""): String {
-        return "Hello ${name(user)}!"
+        val name = name(user)
+        return customMessageGenerator.generate(name)
     }
 
     private fun name(user: String?): String {
