@@ -13,22 +13,17 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
     routing {
-        get("/") {
-            call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
+        get("/greeting") {
+            call.respondText("Hello my friend!", contentType = ContentType.Text.Plain)
         }
 
         install(StatusPages) {
             exception<AuthenticationException> { cause ->
                 call.respond(HttpStatusCode.Unauthorized)
             }
-            exception<AuthorizationException> { cause ->
-                call.respond(HttpStatusCode.Forbidden)
-            }
-
         }
     }
 }
 
 class AuthenticationException : RuntimeException()
-class AuthorizationException : RuntimeException()
 

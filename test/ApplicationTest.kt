@@ -13,9 +13,9 @@ class ApplicationTest {
     @Test
     fun testRoot() {
         withTestApplication({ module(testing = true) }) {
-            handleRequest(HttpMethod.Get, "/").apply {
+            handleRequest(HttpMethod.Get, "/greeting").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("HELLO WORLD!", response.content)
+                assertEquals("Hello my friend!", response.content)
             }
         }
     }
